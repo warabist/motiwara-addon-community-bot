@@ -1,6 +1,6 @@
-import { Bot } from './core';
-import { AddonLevelSystem } from './core/addonLevelSystem';
-import { LevelUpEmoji } from './core/addonLevelSystem/core/LevelUpEmoji';
+import { Bot } from './Bot';
+import { AddonLevelSystem } from './addonLevelSystem';
+import { LevelUpEmoji } from './addonLevelSystem/LevelUpEmoji';
 
 new Bot(
     new AddonLevelSystem([

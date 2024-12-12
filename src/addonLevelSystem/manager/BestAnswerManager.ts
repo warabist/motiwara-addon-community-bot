@@ -1,5 +1,5 @@
 import { EmbedBuilder, Message, type ForumThreadChannel } from 'discord.js';
-import { getRecentBotMessage } from '../../../utilities/getRecentBotMessage';
+import { getRecentBotMessage } from '../../utilities/getRecentBotMessage';
 
 export class BestAnswerManager {
     constructor(private resolvedTagId: string) {}

@@ -9,11 +9,11 @@ import {
     type ForumThreadChannel,
     Client,
 } from 'discord.js';
-import { resolvePartialData } from '../../../utilities/resolvePartialData';
-import { channelIdToLevelName } from '../utilities/channelIdToLevelName';
-import { getRecentBotMessage } from '../../../utilities/getRecentBotMessage';
-import { BestAnswerManager } from './BestAnswerManager';
+import { resolvePartialData } from '../utilities/resolvePartialData';
+import { getRecentBotMessage } from '../utilities/getRecentBotMessage';
+import { BestAnswerManager } from './manager/BestAnswerManager';
 import { Database } from 'sqlite3';
+import { levels } from './constants/levels';
 
 /** レベルアップに使う絵文字 */
 export class LevelUpEmoji {
@@ -115,9 +115,12 @@ export class LevelUpEmoji {
         amount: number,
         thread: ForumThreadChannel
     ): void {
-        const levelName = channelIdToLevelName(thread.parentId as string);
+        const levelName =
+            levels.find((level) => {
+                return level.channelId === thread.parentId;
+            })?.name ?? thread.parentId;
 
-        //ここでレベル更新
+        //ここでレベル更新処理を入れる予定
 
         console.log(
             author.displayName +
@@ -129,7 +132,7 @@ export class LevelUpEmoji {
         );
     }
 
-    /** レベル管理処理を飛ばす必要があるかを返す */
+    /** レベル管理処理を飛ばすかを返す */
     private shouldSkipProcessing(
         reaction: MessageReaction,
         user: User
@@ -138,11 +141,16 @@ export class LevelUpEmoji {
         if (!channel.isThread()) return true;
 
         const isBot = user.bot || reaction.message.author?.bot;
-        const isNotEmoji = reaction.emoji?.name !== this.emojiName;
-        const isQuestionChannelParent =
-            channelIdToLevelName(channel.parentId as string) === undefined;
+        const isNotLevelUpEmoji = reaction.emoji?.name !== this.emojiName;
+        const isNotQuestionChannelParent =
+            levels.find((level) => {
+                return level.channelId === channel.parentId;
+            }) === undefined;
         const isOwner = user.id === channel.ownerId;
 
-        return isBot || isNotEmoji || isQuestionChannelParent || isOwner;
+        //どれかがtrueならば、処理は飛ばされる
+        return (
+            isBot || isNotLevelUpEmoji || isNotQuestionChannelParent || isOwner
+        );
     }
 }

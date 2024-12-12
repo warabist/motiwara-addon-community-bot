@@ -1,6 +1,6 @@
 import { Client } from 'discord.js';
-import { LevelUpEmoji } from './core/LevelUpEmoji';
-import { MonthlyUserLevelUpdateSystem } from './core/MonthlyUserLevelUpdateSystem';
+import { LevelUpEmoji } from './LevelUpEmoji';
+import { MonthlyUserLevelUpdateSystem } from './MonthlyUserLevelUpdateSystem';
 import { Database } from 'sqlite3';
 
 export class AddonLevelSystem {

@@ -1,6 +1,4 @@
-import { levelNames } from '../constants/levelNames';
 import { Client, type Snowflake, TextChannel } from 'discord.js';
-import { levelNameToLevelDisplayName } from '../utilities/levelNameToLevelDisplayName';
 
 export class MonthlyUserLevelUpdateSystem {
     private channelSendMessage: Promise<TextChannel>;
@@ -11,10 +9,10 @@ export class MonthlyUserLevelUpdateSystem {
             channelIdSendMessage
         ) as Promise<TextChannel>;
         this.month = new Date().getMonth();
-        this.initInterval();
+        this.initializeInterval();
     }
 
-    private initInterval(): void {
+    private initializeInterval(): void {
         setInterval(this.handleInterval, 60 * 60 * 1000);
     }
 

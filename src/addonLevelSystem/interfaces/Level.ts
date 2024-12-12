@@ -1,5 +1,5 @@
 export interface Level {
-    name: string;
-    displayName: string;
-    channelId: string;
+  name: string;
+  displayName: string;
+  channelId: string;
 }

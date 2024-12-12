@@ -4,30 +4,30 @@ import { MonthlyUserLevelUpdateSystem } from './MonthlyUserLevelUpdateSystem';
 import { Database } from 'sqlite3';
 
 export class AddonLevelSystem {
-    private client?: Client;
-    private userdb?: Database;
+  private client?: Client;
+  private userdb?: Database;
 
-    constructor(private levelUpEmojis: LevelUpEmoji[]) {}
+  constructor(private levelUpEmojis: LevelUpEmoji[]) {}
 
-    initialize(client: Client, userdb: Database) {
-        this.client = client;
-        this.userdb = userdb;
-        this.registerLevelUpEmojis();
+  initialize(client: Client, userdb: Database) {
+    this.client = client;
+    this.userdb = userdb;
+    this.registerLevelUpEmojis();
+  }
+
+  private registerLevelUpEmojis(): void {
+    if (this.client === undefined) {
+      throw new Error(
+        '絵文字を登録しようとしましたが、clientがundefinedでした'
+      );
     }
-
-    private registerLevelUpEmojis(): void {
-        if (this.client === undefined) {
-            throw new Error(
-                '絵文字を登録しようとしましたが、clientがundefinedでした'
-            );
-        }
-        if (this.userdb === undefined) {
-            throw new Error(
-                '絵文字を登録しようとしましたが、userdbがundefinedでした'
-            );
-        }
-        for (const levelUpEmoji of this.levelUpEmojis) {
-            levelUpEmoji.register(this.client, this.userdb);
-        }
+    if (this.userdb === undefined) {
+      throw new Error(
+        '絵文字を登録しようとしましたが、userdbがundefinedでした'
+      );
     }
+    for (const levelUpEmoji of this.levelUpEmojis) {
+      levelUpEmoji.register(this.client, this.userdb);
+    }
+  }
 }

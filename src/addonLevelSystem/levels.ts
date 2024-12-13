@@ -1,4 +1,4 @@
-import { Level } from '../interfaces/Level';
+import { Level } from './interfaces/Level';
 
 export const levels: Level[] = [
   {

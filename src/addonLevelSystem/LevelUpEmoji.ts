@@ -13,7 +13,7 @@ import { resolvePartialData } from '../utilities/resolvePartialData';
 import { getRecentBotMessage } from '../utilities/getRecentBotMessage';
 import { BestAnswerManager } from './manager/BestAnswerManager';
 import { Database } from 'sqlite3';
-import { levels } from './constants/levels';
+import { levels } from './levels';
 
 /** レベルアップに使う絵文字 */
 export class LevelUpEmoji {
